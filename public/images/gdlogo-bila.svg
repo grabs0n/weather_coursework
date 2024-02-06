@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="170mm"
+   height="170mm"
+   viewBox="0 0 170 170"
+   version="1.1"
+   id="svg3746"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs3740" />
+  <metadata
+     id="metadata3743">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     transform="translate(0,-127)">
+    <g
+       id="g11"
+       transform="translate(-23.101193,68.458329)"
+       style="fill:#ffffff">
+      <path
+         style="clip-rule:evenodd;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.01;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+         id="path12"
+         d="M 104.34838,227.70503 C -4.1578204,216.46732 -0.96598438,68.670069 104.45031,59.378312 v 13.825605 c -83.770012,4.95 -97.4800134,117.120023 -16.210005,138.840023 6.470002,1.04 6.594727,1.04 6.944728,0.84 0.03,-14.4 -0.07559,-28.65444 -0.02471,-43.33485 -7.740002,-0.03 -15.535505,-0.0301 -23.220336,-0.0301 v -10.31561 l 32.502263,-0.0517 c 0.0977,27.11015 -0.0939,45.87588 -0.0939,68.55334 z"
+         class="fil0" />
+      <path
+         style="clip-rule:evenodd;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.01;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+         id="path14"
+         d="M 111.83042,227.57591 V 59.403257 c 107.49861,9.435974 106.36204,158.922403 0,168.172653 z m 9.23989,-14.29197 -0.15,-139.170023 c 51.87001,7.470001 76.10001,60.440003 51.92001,105.680023 -13.62,19.33 -28.3,29.01 -51.77001,33.48 v 0 z"
+         class="fil0" />
+    </g>
+  </g>
+</svg>

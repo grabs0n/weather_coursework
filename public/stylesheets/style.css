@@ -1,0 +1,42 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #D0E4FF;
+}
+
+:root {
+  --primary: #0062A1;
+  --on-primary: #FFFFFF;
+}
+
+.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 25px 52px 25px 52px;
+  margin-bottom: 14px;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-radius: 0 0 12px 12px;
+}
+
+.logo {
+  margin-bottom: 24px;
+  height: 40px;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  font-size: 48px;
+  margin-bottom: 24px;
+}
+
+.header p {
+  font-size: 18px;
+  margin-bottom: 0;
+}
