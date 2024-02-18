@@ -9,10 +9,15 @@ body {
 :root {
   --primary: #0062A1;
   --on-primary: #FFFFFF;
+  --on-primary-container: #001D35;
+  --primary-fixed: #D0E4FF;
+  --primary-fixed-dim: #9CCAFF;
+  --secondary: #525F70;
+  --on-secondary: #FFFFFF;
 }
 
 .wrapper {
-  width: 1200px;
+  width: 1100px;
   margin: 0 auto;
 }
 
@@ -39,4 +44,143 @@ body {
 .header p {
   font-size: 18px;
   margin-bottom: 0;
+}
+
+.info_table {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date_time {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: var(--primary);
+  width: 350px;
+  border-radius: 12px;
+}
+
+.time {
+  color: var(--on-primary-container);
+  font-size: 57px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 0px 40px;
+  justify-content: space-between;
+}
+
+.time_header {
+  width: 100%;
+  margin: 5px 0;
+  color: var(--on-primary);
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.time_element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-fixed-dim);
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--on-primary);
+  width: 30%;
+}
+
+.date {
+  margin: 5px 0;
+  color: var(--on-primary);
+  text-align: center;
+  font-size: 24px;
+}
+
+.last_measutments {
+  width: 350px;
+  height: 170px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: var(--secondary);
+  display: flex;
+  justify-content: space-between;
+}
+
+.current_conditions_icon {
+  background-color: #fff;
+  display: block;
+  width: 130px;
+  height: 130px;
+  border-radius: inherit
+}
+
+.data {
+  margin-left: 14px;
+  color: var(--on-secondary);
+}
+
+.temperature {
+  font-weight: 700;
+  font-size: 36px;
+}
+
+.condition {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.wind {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24px;
+}
+
+.statistics {
+  width: 730px;
+  min-height: 200px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--primary);
+  border-radius: 12px;
+}
+
+.col {
+  width: 49%;
+  padding: 10px;
+  background-color: var(--primary-fixed-dim);
+  border-radius: 12px;
+}
+
+.col_label {
+  margin-bottom: 10px;
+  font-size: 32px;
+  text-align: center;
+}
+
+.item {
+  padding: 0 8px;
+  margin-bottom: 8px;
+  width: 100%;
+  display: flex;
+  border-radius: 12px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-fixed);
+
+  .item_label {
+    font-size: 24px;
+  }
+
+  .item_value {
+    font-size: 20px;
+  }
 }

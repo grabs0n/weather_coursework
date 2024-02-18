@@ -9,8 +9,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/style.css">
 
     <!-- <script type="module" src="./node_modules/ejs/ejs.min.js"></script> -->
@@ -25,35 +24,85 @@
             <p>Aktuální informace o počasí a archiv</p>
         </div>
         <div class="info_table">
-            <div class="date_time">
-                <div class="time">
-                    <div class="hours">07</div>
-                    <div class="divider">:</div>
-                    <div class="minutes">00</div>
-                </div>
-                <div class="date">Čtvrtek 16. Červenec</div>
-            </div>
-
-            <div class="last_measutments">
-                <img src="" alt="current_condition_icon" class="condition_icon">
-                <div class="data">
-                    <div class="temperature">
-
+            <div class="first_col">
+                <div class="date_time">
+                    <div class="time_header">Poslední měření</div>
+                    <div class="time">
+                        <div class="hours time_element">
+                            <%= data.time.hours %>
+                        </div>
+                        <div class="divider">:</div>
+                        <div class="minutes time_element">
+                            <%= data.time.minutes %>
+                        </div>
                     </div>
-                    <div class="condition">
-
-
-                    </div>
-
-                    <div class="wind">
-                        <div class="speed"></div>
-                        <div class="direction"></div>
+                    <div class="date">
+                        <%= data.time.day %>.<%= data.time.month %>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="statistics">
 
+                <div class="last_measutments">
+                    <img src="" alt="current_conditions_icon" class="current_conditions_icon">
+                    <div class="data">
+                        <div class="temperature">
+                            <%= data.last_observation.temp %>
+                        </div>
+                        <div class="condition">
+                            <%= data.last_observation.condition %>
+                        </div>
+
+                        <div class="wind">
+                            <div class="speed">
+                                <%= data.last_observation.metric.windSpeed %>
+                            </div>
+                            <div class="direction">
+                                <%= data.last_observation.winddir %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statistics">
+                <div class="col">
+                    <div class="col_label">Dnešní data</div>
+                    <div class="item">
+                        <div class="item_label">Teplota</div>
+                        <div class="item_value">-12.5°C až 10.2°C </div>
+                    </div>
+                    <div class="item">
+                        <div class="item_label">Teplota</div>
+                        <div class="item_value">-12.5°C až 10.2°C </div>
+                    </div>
+                    <div class="item">
+                        <div class="item_label">Teplota</div>
+                        <div class="item_value">-12.5°C až 10.2°C </div>
+                    </div>
+                    <div class="item">
+                        <div class="item_label">Teplota</div>
+                        <div class="item_value">-12.5°C až 10.2°C </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col_label">Dnešní data</div>
+                    <div class="item">
+                        <div class="item_label">Teplota</div>
+                        <div class="item_value">-12.5°C až 10.2°C </div>
+                    </div>
+                    <div class="item">
+                        <div class="item_label">Teplota</div>
+                        <div class="item_value">-12.5°C až 10.2°C </div>
+                    </div>
+                    <div class="item">
+                        <div class="item_label">Teplota</div>
+                        <div class="item_value">-12.5°C až 10.2°C </div>
+                    </div>
+                    <div class="item">
+                        <div class="item_label">Teplota</div>
+                        <div class="item_value">-12.5°C až 10.2°C </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
