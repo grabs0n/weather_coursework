@@ -12,8 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/style.css">
 
-    <!-- <script type="module" src="./node_modules/ejs/ejs.min.js"></script> -->
-    <!-- <script type="module" src="./index.js"></script> -->
+
+    <script src="javascripts/chart.umd.js"></script>
+
 </head>
 
 <body>
@@ -53,7 +54,7 @@
 
                         <div class="wind">
                             <div class="speed">
-                                <%= data.last_observation.metric.windSpeed %>
+                                <%= data.last_observation.windSpeed %>
                             </div>
                             <div class="direction">
                                 <%= data.last_observation.winddir %>
@@ -63,51 +64,42 @@
                 </div>
             </div>
             <div class="statistics">
-                <div class="col">
-                    <div class="col_label">Dnešní data</div>
-                    <div class="item">
-                        <div class="item_label">Teplota</div>
-                        <div class="item_value">-12.5°C až 10.2°C </div>
+                <% data.statistics.forEach(function(column){ %>
+                    <div class="col">
+                        <div class="col_label">
+                            <%= column.label %>
+                        </div>
+                        <% column.items.forEach(function(item){ %>
+                            <div class="item">
+                                <div class="item_label">
+                                    <%= item.name %>
+                                </div>
+                                <div class="item_value">
+                                    <% if(item.value.min){ %>
+                                        <div class="value_part" data-time="<%= item.value.min.time %>">
+                                            <%= item.value.min.value %> až
+                                        </div>
+                                        <div class="value_part" data-time="<%= item.value.max.time %>">
+                                            <%= item.value.max.value %>
+                                                <%= item.value.unit %>
+                                        </div>
+                                        <% } else{ %>
+                                            <%= item.value %>
+                                                <% } %>
+                                </div>
+                            </div>
+                            <% }); %>
                     </div>
-                    <div class="item">
-                        <div class="item_label">Teplota</div>
-                        <div class="item_value">-12.5°C až 10.2°C </div>
-                    </div>
-                    <div class="item">
-                        <div class="item_label">Teplota</div>
-                        <div class="item_value">-12.5°C až 10.2°C </div>
-                    </div>
-                    <div class="item">
-                        <div class="item_label">Teplota</div>
-                        <div class="item_value">-12.5°C až 10.2°C </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="col_label">Dnešní data</div>
-                    <div class="item">
-                        <div class="item_label">Teplota</div>
-                        <div class="item_value">-12.5°C až 10.2°C </div>
-                    </div>
-                    <div class="item">
-                        <div class="item_label">Teplota</div>
-                        <div class="item_value">-12.5°C až 10.2°C </div>
-                    </div>
-                    <div class="item">
-                        <div class="item_label">Teplota</div>
-                        <div class="item_value">-12.5°C až 10.2°C </div>
-                    </div>
-                    <div class="item">
-                        <div class="item_label">Teplota</div>
-                        <div class="item_value">-12.5°C až 10.2°C </div>
-                    </div>
-                </div>
+                    <% }); %>
             </div>
         </div>
 
 
+        <div class="chart"><canvas id="chart"></canvas></div>
+    </div>
 
     </div>
 </body>
+<script src="javascripts/index.js"></script>
 
 </html>

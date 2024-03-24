@@ -123,6 +123,7 @@ body {
 }
 
 .data {
+  width: 166px;
   margin-left: 14px;
   color: var(--on-secondary);
 }
@@ -143,6 +144,7 @@ body {
   font-size: 24px;
 }
 
+
 .statistics {
   width: 730px;
   min-height: 200px;
@@ -151,6 +153,12 @@ body {
   justify-content: space-between;
   background-color: var(--primary);
   border-radius: 12px;
+}
+
+.first_col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .col {
@@ -176,11 +184,20 @@ body {
   align-items: center;
   background-color: var(--primary-fixed);
 
-  .item_label {
-    font-size: 24px;
-  }
+}
 
-  .item_value {
-    font-size: 20px;
-  }
+.item_label {
+  font-size: 24px;
+}
+
+.item_value {
+  font-size: 20px;
+}
+
+.value_part {
+  display: inline;
+}
+
+.chart {
+  width: 100%;
 }
