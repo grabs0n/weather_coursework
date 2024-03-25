@@ -201,3 +201,15 @@ body {
 .chart {
   width: 100%;
 }
+
+.chart_block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100px;
+  padding: 15px 30px;
+}
+
+.period_selector_button {
+  padding: 10px;
+}
