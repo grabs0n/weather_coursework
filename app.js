@@ -38,7 +38,7 @@ function windDirection(degrees) {
         'J', 'J/Z', 'Z', 'S/Z'
     ];
 
-    const index = Math.round(degrees / 45);
+    let index = Math.round(degrees / 45);
     if (index === 8) index = 0;
 
     return directions[index];

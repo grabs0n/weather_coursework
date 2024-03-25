@@ -16,7 +16,7 @@
     new Chart(
         document.getElementById('chart'),
         {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: data.map(row => row.obsTimeLocal),
                 datasets: [
