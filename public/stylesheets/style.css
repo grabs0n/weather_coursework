@@ -14,6 +14,9 @@ body {
   --primary-fixed-dim: #9CCAFF;
   --secondary: #525F70;
   --on-secondary: #FFFFFF;
+  --surface: #F7FAF9;
+  --on-surface: #191C1C;
+  --outline: #6F7979;
 }
 
 .wrapper {
@@ -205,11 +208,72 @@ body {
 .chart_block {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background-color: var(--surface);
   justify-content: space-between;
-  width: 100px;
+
   padding: 15px 30px;
 }
 
+.period_selector {
+  width: 520px;
+  display: flex;
+  justify-content: center;
+
+}
+
 .period_selector_button {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
+  font-size: 14px;
+  color: var(--on-surface);
+  border: 1px solid var(--outline);
+  border-left: none;
+}
+
+.period_selector_button:first-child {
+  border-left: 1px solid var(--outline);
+  border-radius: 999px 0 0 999px;
+}
+
+.period_selector_button:last-child {
+  border-radius: 0 999px 999px 0;
+}
+
+.chart {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chart_data_selector {
+  width: 255px;
+  margin-right: 15px;
+}
+
+.chart_container {
+  width: 770px;
+}
+
+.chart_data_selector {
+  width: 225px;
+  margin: 0 30px;
+}
+
+
+.chart_data_selector_item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.chart_data_selector_item input {
+  width: 17px;
+  height: 17px;
+}
+
+.chart_data_selector_item input:checked~.checkmark {
+  background-color: var(--primary);
 }

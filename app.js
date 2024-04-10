@@ -90,8 +90,6 @@ app.get('/', async (req, res) => {
     let date = last_observation.obsTimeLocal.split(' ')[0].split('-');
     let time = last_observation.obsTimeLocal.split(' ')[1].split(':');
 
-    // console.log(getMin(day_observations, ['metric', 'tempLow']))
-    // console.log(getMax(day_observations, ['metric', 'tempHigh']))
     let data = {
         time: {
             hours: time[0],
@@ -250,6 +248,37 @@ app.get('/', async (req, res) => {
                 },
             ]
         },],
+        chart_data:
+            [
+                {
+                    label: "Teplota",
+                    path: ['metric', 'tempAvg']
+                },
+                {
+                    label: "Rychlost větru",
+                    path: ['metric', 'windspeedAvg']
+                },
+                {
+                    label: "Srážky",
+                    path: ['metric', 'preciprate']
+                },
+                {
+                    label: "Vlhkost",
+                    path: ['humidityAvg']
+                },
+                {
+                    label: "Rosný bod",
+                    path: ['metric', 'dewptAvg']
+                },
+                {
+                    label: "Tlak",
+                    path: ['metric', 'pressureMax']
+                },
+                {
+                    label: "Sluneční radiace",
+                    path: ['solarRadiationHigh']
+                },
+            ]
 
     };
     res.render('pages/index', { data: data });

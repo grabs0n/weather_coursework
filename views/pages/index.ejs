@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/checkbox.css">
 
 
     <script src="javascripts/chart.umd.js"></script>
@@ -103,20 +104,22 @@
                 <div class="period_selector_button">Týden</div>
             </div>
             <div class="chart">
-                <canvas id="chart"></canvas>
-                <div class="chart_data_selector">
-                    <div class="chart_data_selector_option">Teplota</div>
-                    <div class="chart_data_selector_option">Rychlost větru</div>
-                    <div class="chart_data_selector_option">Srážky</div>
-                    <div class="chart_data_selector_option">Vlhkost</div>
-                    <div class="chart_data_selector_option">Rosný bod</div>
-                    <div class="chart_data_selector_option">Tlak</div>
-                    <div class="chart_data_selector_option">Sluneční radiace</div>
+                <div class="chart_container">
+                    <canvas id="chart"></canvas>
                 </div>
-            </div>
+                <div class="chart_data_selector">
+                    <% data.chart_data.forEach(function(element){ %>
+                        <div class="chart_data_selector_item" data-path='<%= element.path %>' data-label = <%= element.label %>>
+                            <div class="chart_data_selector_item_text">
+                                <%= element.label %>
+                            </div>
+                            <input type="checkbox">
+                        </div>
+                        <% }); %>
+                </div>
 
+            </div>
         </div>
-    </div>
 
     </div>
 </body>
