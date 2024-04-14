@@ -1,6 +1,52 @@
+function generateDataset(chart_contents, data) {
+
+    let result = chart_contents.map(row => {
+        let path = row.path;
+        return {
+            label: row.label,
+            data: data.map(row => {
+                let value = row;
+                for (let element of path) {
+                    value = value[element];
+                }
+                return value;
+            }),
+            hidden: !row.enabled
+        }
+    });
+
+    return result;
+}
+
+function formateDate(date, include_date, include_time) {
+    let date_part = date.split(' ')[0];
+    let time_part = date.split(' ')[1];
+
+    let formatedDate = date_part.split('-').reverse().slice(0, 2).join('.');
+    let formatedTime = time_part.slice(0, -3);
+    let result = `${include_time ? formatedTime : ''}${include_date ? ' - ' + formatedDate : ''}`;
+    return result;
+}
+
+function generateLabels(data, labels_count, include_date, include_time) {
+    let result = [];
+    let len = data.length;
+    let step = Math.floor(len / labels_count);
+    for (let i = 0; i < labels_count; i++) {
+        let index = i * step;
+        // console.log(index);
+        let row = data[index];
+        // console.log(row);
+        result.push(formateDate(row.obsTimeLocal, include_date, include_time));
+    }
+    return result;
+}
+
+
 (async function () {
-    let response = await fetch('/data/day');
-    var data = await response.json();
+    let response = await fetch('/data');
+    let data = await response.json();
+    let chart_contents = data.chart_contents;
     // console.log(data)
 
     let chart = new Chart(
@@ -8,46 +54,110 @@
         {
             type: 'line',
             data: {
-                labels: data.map(row => row.obsTimeLocal),
-                
-                datasets: data.map(row => {
-                    let value = row;
-                    for (let param of params) {
-                        value = value[param];
-                    }
-                    return value;
-                })
+                labels: generateLabels(data.day, 12, false, true),
+                datasets: generateDataset(chart_contents, data.day)
             }
         }
     );
 
+    let period_selector = document.querySelector('.period_selector');
+    period_selector.addEventListener('click', (event) => {
 
-    document.querySelector('.chart_data_selector').addEventListener('click', function (event) {
-        console.log(event.target.type)
-        if (event.target.type == 'checkbox') {
+        if (event.target.classList.contains('period_selector')) return;
 
-            let params = event.target.parentElement.dataset.path.split(',');
-            let label = event.target.parentElement.dataset.label;
-            // console.log(params);
-
-            if (!event.target.checked) {
-                chart.data.datasets[0].hidden = true;
-            }
-
-            chart.data.labels.push(label);
-            chart.data.datasets.push({
-                label: "line",
-                data: data.map(row => {
-                    let value = row;
-                    for (let param of params) {
-                        value = value[param];
-                    }
-                    return value;
-                })
-            });
-            chart.update();
+        // console.log(period_selector.children)
+        for (let child of period_selector.children) {
+            child.removeAttribute('selected')
         }
+
+        let button = event.target;
+        button.setAttribute('selected', '');
+        let period = button.dataset.period;
+        let neededPart, include_date, include_time, labels_count;
+
+
+        switch (period) {
+            case '12h':
+                labels_count = 12;
+                include_date = false;
+                include_time = true;
+                neededPart = data.day.slice(Math.floor((data.day.length - 1) / 2), data.day.length - 1);
+                break;
+            case '1day':
+                labels_count = 12;
+                include_date = false;
+                include_time = true;
+                neededPart = data.day;
+                break;
+            case '3days':
+                labels_count = 12;
+                include_date = true;
+                include_time = true;
+                neededPart = data.week.slice(Math.floor((data.week.length - 1) / 2), data.week.length - 1);
+                break;
+            case '1week':
+                labels_count = 14;
+                include_date = true;
+                include_time = true;
+                neededPart = data.week
+                break;
+        }
+
+        for (let i = 0; i < chart_contents.length; i++) {
+            // console.log(chart.isDatasetVisible(i))
+            chart_contents[i].enabled = chart.isDatasetVisible(i);
+        }
+
+
+
+        chart.data = {
+            labels: generateLabels(neededPart, labels_count, include_date, include_time),
+            datasets: generateDataset(chart_contents, neededPart)
+        }
+        chart.update();
+    })
+
+    let statistics_element = document.querySelector('.statistics');
+    let popup = document.querySelector('.popup');
+
+    statistics_element.addEventListener('mouseover', (event) => {
+
+        let target = event.target;
+        // console.log(target)
+        if (!target.classList.contains('value_part') | !target.dataset.time) {
+            // popup.style.visibility = 'hidden';
+            popup.style.opacity = 0;
+            return;
+        };
+        // popup.style.visibility = 'visible';
+        popup.style.opacity = 1;
+
+
+        popup.innerText = formateDate(target.dataset.time, true, true);
+        let bounding = target.getBoundingClientRect();
+        popup.style.top = `${bounding.y - 37}px`;
+        popup.style.left = `${bounding.x + bounding.width / 2 - 57}px`;
+
+
     })
 
 
+    //checkboxes
+
+    // document.querySelector('.chart_contents_selector').addEventListener('click', function (event) {
+    //     console.log(event.target.type)
+    //     if (event.target.type == 'checkbox') {
+    //         // console.log(chart)
+
+    //         let params = event.target.parentElement.dataset.path.split(',');
+    //         let label = event.target.parentElement.innerContent;
+    //         // console.log(params);
+    //         let dataset = chart.data.datasets.filter((set) => set.label == label)[0];
+
+    //         dataset.hidden = !event.target.checked;
+
+
+    //         chart.update();
+    //     }
+    // })
 })()

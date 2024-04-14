@@ -15,6 +15,44 @@ const currentLink = 'https://api.weather.com/v2/pws/observations/current?station
 
 let last_observation, day_observations, week_observations;
 
+const chart_contents = [
+    {
+        label: "Teplota",
+        path: ['metric', 'tempAvg'],
+        enabled: true
+    },
+    {
+        label: "Rychlost větru",
+        path: ['metric', 'windspeedAvg'],
+        enabled: false
+    },
+    {
+        label: "Srážky",
+        path: ['metric', 'precipRate'],
+        enabled: false
+    },
+    {
+        label: "Vlhkost",
+        path: ['humidityAvg'],
+        enabled: false
+    },
+    {
+        label: "Rosný bod",
+        path: ['metric', 'dewptAvg'],
+        enabled: false
+    },
+    {
+        label: "Tlak",
+        path: ['metric', 'pressureMax'],
+        enabled: false
+    },
+    {
+        label: "Sluneční radiace",
+        path: ['solarRadiationHigh'],
+        enabled: false
+    },
+]
+
 async function updateData() {
     if (!last_observation || new Date() - new Date(last_observation.obsTimeUtc) >= 300) {
         let response = await fetch(currentLink);
@@ -57,7 +95,7 @@ function getMin(data, properties) {
         }
 
         // If result is not defined yet or the value is less than result, update result
-        if (!result || value < minValue) {
+        if (!result || Number(value) < Number(minValue)) {
             minValue = value;
             result = element;
         }
@@ -236,60 +274,31 @@ app.get('/', async (req, res) => {
                     name: 'Tlak',
                     value: {
                         min: {
-                            value: getMin(week_observations, ['metric', 'pressureLow']).metric.pressureLow,
-                            time: getMin(week_observations, ['metric', 'pressureLow']).obsTimeLocal
+                            value: getMin(week_observations, ['metric', 'pressureMin']).metric.pressureMin,
+                            time: getMin(week_observations, ['metric', 'pressureMin']).obsTimeLocal
                         },
                         max: {
-                            value: getMax(week_observations, ['metric', 'pressureHigh']).metric.pressureHigh,
-                            time: getMax(week_observations, ['metric', 'pressureHigh']).obsTimeLocal
+                            value: getMax(week_observations, ['metric', 'pressureMax']).metric.pressureMax,
+                            time: getMax(week_observations, ['metric', 'pressureMax']).obsTimeLocal
                         },
                         unit: 'mBar'
                     }
                 },
             ]
         },],
-        chart_data:
-            [
-                {
-                    label: "Teplota",
-                    path: ['metric', 'tempAvg']
-                },
-                {
-                    label: "Rychlost větru",
-                    path: ['metric', 'windspeedAvg']
-                },
-                {
-                    label: "Srážky",
-                    path: ['metric', 'preciprate']
-                },
-                {
-                    label: "Vlhkost",
-                    path: ['humidityAvg']
-                },
-                {
-                    label: "Rosný bod",
-                    path: ['metric', 'dewptAvg']
-                },
-                {
-                    label: "Tlak",
-                    path: ['metric', 'pressureMax']
-                },
-                {
-                    label: "Sluneční radiace",
-                    path: ['solarRadiationHigh']
-                },
-            ]
+        chart_contents: chart_contents
 
     };
     res.render('pages/index', { data: data });
 })
 
-app.get('/data/:period', async (req, res) => {
+app.get('/data', async (req, res) => {
     await updateData();
-    let period = req.params.period;
-    let response;
-    if (period == "day") response = day_observations;
-    if (period == "week") response = week_observations;
+    let response = {
+        day: day_observations,
+        week: week_observations,
+        chart_contents: chart_contents
+    };
     res.send(response);
 })
 

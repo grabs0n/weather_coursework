@@ -65,6 +65,7 @@
                 </div>
             </div>
             <div class="statistics">
+                <div class="popup"></div>
                 <% data.statistics.forEach(function(column){ %>
                     <div class="col">
                         <div class="col_label">
@@ -98,17 +99,17 @@
 
         <div class="chart_block">
             <div class="period_selector">
-                <div class="period_selector_button">12 hodin</div>
-                <div class="period_selector_button">1 den</div>
-                <div class="period_selector_button">3 dny</div>
-                <div class="period_selector_button">Týden</div>
+                <div class="period_selector_button" data-period='12h'>12 hodin</div>
+                <div class="period_selector_button" data-period='1day' selected>1 den</div>
+                <div class="period_selector_button" data-period='3days'>3 dny</div>
+                <div class="period_selector_button" data-period='1week'>Týden</div>
             </div>
             <div class="chart">
                 <div class="chart_container">
                     <canvas id="chart"></canvas>
                 </div>
-                <div class="chart_data_selector">
-                    <% data.chart_data.forEach(function(element){ %>
+                <!-- <div class="chart_data_selector">
+                    <% data.chart_contents.forEach(function(element){ %>
                         <div class="chart_data_selector_item" data-path='<%= element.path %>' data-label = <%= element.label %>>
                             <div class="chart_data_selector_item_text">
                                 <%= element.label %>
@@ -116,7 +117,7 @@
                             <input type="checkbox">
                         </div>
                         <% }); %>
-                </div>
+                </div> -->
 
             </div>
         </div>
