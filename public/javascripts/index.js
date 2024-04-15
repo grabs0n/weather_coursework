@@ -1,16 +1,22 @@
-function generateDataset(chart_contents, data) {
+function generateDataset(chart_contents, data, items_count) {
 
     let result = chart_contents.map(row => {
         let path = row.path;
+        let len = data.length;
+        let step = Math.floor(len / items_count);
+        let generatedData = [];
+        for (let i = 0; i < items_count; i++) {
+            let index = i * step;
+            let row = data[index];
+            let value = row;
+            for (let element of path) {
+                value = value[element];
+            }
+            generatedData.push(value);
+        }
         return {
             label: row.label,
-            data: data.map(row => {
-                let value = row;
-                for (let element of path) {
-                    value = value[element];
-                }
-                return value;
-            }),
+            data: generatedData,
             hidden: !row.enabled
         }
     });
@@ -34,9 +40,7 @@ function generateLabels(data, labels_count, include_date, include_time) {
     let step = Math.floor(len / labels_count);
     for (let i = 0; i < labels_count; i++) {
         let index = i * step;
-        // console.log(index);
         let row = data[index];
-        // console.log(row);
         result.push(formateDate(row.obsTimeLocal, include_date, include_time));
     }
     return result;
@@ -54,8 +58,8 @@ function generateLabels(data, labels_count, include_date, include_time) {
         {
             type: 'line',
             data: {
-                labels: generateLabels(data.day, 12, false, true),
-                datasets: generateDataset(chart_contents, data.day)
+                labels: generateLabels(data.day, 48, false, true),
+                datasets: generateDataset(chart_contents, data.day, 48)
             }
         }
     );
@@ -78,25 +82,25 @@ function generateLabels(data, labels_count, include_date, include_time) {
 
         switch (period) {
             case '12h':
-                labels_count = 12;
+                labels_count = 24;
                 include_date = false;
                 include_time = true;
                 neededPart = data.day.slice(Math.floor((data.day.length - 1) / 2), data.day.length - 1);
                 break;
             case '1day':
-                labels_count = 12;
+                labels_count = 48;
                 include_date = false;
                 include_time = true;
                 neededPart = data.day;
                 break;
             case '3days':
-                labels_count = 12;
+                labels_count = 48;
                 include_date = true;
                 include_time = true;
                 neededPart = data.week.slice(Math.floor((data.week.length - 1) / 2), data.week.length - 1);
                 break;
             case '1week':
-                labels_count = 14;
+                labels_count = 70;
                 include_date = true;
                 include_time = true;
                 neededPart = data.week
@@ -112,7 +116,7 @@ function generateLabels(data, labels_count, include_date, include_time) {
 
         chart.data = {
             labels: generateLabels(neededPart, labels_count, include_date, include_time),
-            datasets: generateDataset(chart_contents, neededPart)
+            datasets: generateDataset(chart_contents, neededPart, labels_count)
         }
         chart.update();
     })
