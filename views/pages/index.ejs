@@ -44,21 +44,24 @@
                 </div>
 
                 <div class="last_measutments">
-                    <img src="" alt="current_conditions_icon" class="current_conditions_icon">
                     <div class="data">
                         <div class="temperature">
-                            <%= data.last_observation.temp %>
-                        </div>
-                        <div class="condition">
-                            <%= data.last_observation.condition %>
-                        </div>
-
-                        <div class="wind">
-                            <div class="speed">
-                                <%= data.last_observation.windSpeed %>
+                            <div class="label">Teplota</div>
+                            <div class="value">
+                                <%= data.last_observation.temp %>
                             </div>
-                            <div class="direction">
-                                <%= data.last_observation.winddir %>
+                        </div>
+                        <div class="wind">
+                            <div class="label">Vitr</div>
+                            <div class="value">
+                                <%= data.last_observation.windSpeed %> |
+                                    <%= data.last_observation.winddir %>
+                            </div>
+                        </div>
+                        <div class="uvIndex">
+                            <div class="label">UV Index</div>
+                            <div class="value">
+                                <%= data.last_observation.uv %>
                             </div>
                         </div>
                     </div>
@@ -121,7 +124,6 @@
 
             </div>
         </div>
-
     </div>
 </body>
 <script src="javascripts/index.js"></script>

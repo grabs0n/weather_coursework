@@ -138,9 +138,9 @@ app.get('/', async (req, res) => {
         last_observation:
         {
             temp: `${last_observation.metric.temp} °C`,
-            condition: '',
             windSpeed: `${last_observation.metric.windSpeed} m/s`,
             winddir: windDirection(last_observation.winddir),
+            uv: `${last_observation.uv}`
         },
         statistics: [{
             label: 'Dnešní data',

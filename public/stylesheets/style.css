@@ -127,25 +127,28 @@ body {
 }
 
 .data {
-  width: 166px;
-  margin-left: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+
   color: var(--on-secondary);
+  font-size: 24px;
 }
 
 .temperature {
-  font-weight: 700;
-  font-size: 36px;
-}
-
-.condition {
-  font-weight: 700;
-  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .wind {
   display: flex;
   justify-content: space-between;
-  font-size: 24px;
+}
+
+.uvIndex {
+  display: flex;
+  justify-content: space-between;
 }
 
 
